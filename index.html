@@ -49,10 +49,17 @@
         html {
             scroll-behavior: smooth;
         }
-        /* Custom hover effects for project cards */
-        .project-card:hover {
+        /* Custom hover effects for project and blog cards */
+        .project-card:hover, .blog-card:hover {
             transform: translateY(-5px);
             transition: transform 0.3s ease;
+        }
+        /* Hide full content by default */
+        .blog-content {
+            display: none;
+        }
+        .blog-content.active {
+            display: block;
         }
     </style>
 </head>
@@ -68,6 +75,7 @@
                 <li><a href="#projects" class="hover:text-blue-300">Projects</a></li>
                 <li><a href="#education" class="hover:text-blue-300">Education</a></li>
                 <li><a href="#skills" class="hover:text-blue-300">Skills</a></li>
+                <li><a href="#blog" class="hover:text-blue-300">Blog</a></li>
                 <li><a href="#contact" class="hover:text-blue-300">Contact</a></li>
             </ul>
         </div>
@@ -228,7 +236,8 @@
                 <div class="bg-gray-100 p-4 rounded-lg">
                     <p>Performance Optimization, Debugging, PCI Compliance, Cryptographic Protocols</p>
                 </div>
-                <div class="bg-gray-100 p-                    <h3 class="font-semibold">Payment Terminals</h3>
+                <div class="bg-gray-100 p-4 rounded-lg">
+                    <h3 class="font-semibold">Payment Terminals</h3>
                     <p>M919, Qpos, P10, P5, KOZEN, APOS</p>
                 </div>
                 <div class="bg-gray-100 p-4 rounded-lg">
@@ -239,28 +248,99 @@
         </div>
     </section>
 
+    <!-- Blog Section -->
+    <section id="blog" class="py-16 bg-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-center mb-8">Blog</h2>
+            <div class="space-y-6">
+                <!-- Blog Post 1 -->
+                <div class="blog-card bg-white p-6 rounded-lg shadow-md cursor-pointer" onclick="toggleBlogContent('blog1')">
+                    <h3 class="text-xl font-semibold">Enhancing Android Security with a Custom Virtual Machine</h3>
+                    <p class="text-gray-600 text-sm">Posted on June 19, 2025</p>
+                    <p class="text-gray-600 mt-2">Exploring why executing root detection in a custom VM is more secure than traditional Java, Kotlin, or C/C++ approaches.</p>
+                    <div id="blog1" class="blog-content mt-4 text-gray-700">
+                        <p>There are many techniques to protect sensitive code in Android, such as obfuscation or moving logic to native C/C++ code compiled to machine code. However, tools like IDA Pro, Ghidra, and Frida make it easy to reverse-engineer and hook such code with custom implementations.</p>
+                        <p>In this post, I discuss why executing root detection inside a custom virtual machine (VM) is significantly more secure than running the same logic directly in Java, Kotlin, or even native C/C++ code—and what this means for tools like Frida and experienced reverse engineers.</p>
+                        <h4 class="text-lg font-semibold mt-4">Root Detection in ART or Native</h4>
+                        <p>Most apps implement root detection with simple checks, like this in Kotlin:</p>
+                        <pre class="bg-gray-800 text-white p-4 rounded"><code>fun isDeviceRooted(): Boolean {
+    return File("/system/bin/su").exists()
+}</code></pre>
+                        <p>Or in C:</p>
+                        <pre class="bg-gray-800 text-white p-4 rounded"><code>bool isRooted() {
+    return access("/system/bin/su", F_OK) == 0;
+}</code></pre>
+                        <p>While these might catch some rooted devices, Frida scripts can override return values, decompiled APKs reveal function names, and native .so files can be patched using tools like Ghidra or IDA Pro.</p>
+                        <h4 class="text-lg font-semibold mt-4">Using a Custom VM</h4>
+                        <p>A custom VM operates by defining a unique bytecode format and instruction set (e.g., opcodes like CHECK_ROOT, HALT). Sensitive logic is written in this bytecode, not in Kotlin or Java, and executed by a custom interpreter at runtime. For example:</p>
+                        <pre class="bg-gray-800 text-white p-4 rounded"><code>val bytecode = byteArrayOf(0x01, 0xFF) // CHECK_ROOT, HALT
+val vm = CustomVM(bytecode)
+val result = vm.run()</code></pre>
+                        <p>The actual logic, such as which files to check or APIs to call, resides within the VM’s opcode handling, not in exposed functions.</p>
+                        <h4 class="text-lg font-semibold mt-4">Challenges with Frida</h4>
+                        <p>Frida works by hooking well-known methods (e.g., <code>access</code>, <code>exists</code>, <code>System.loadLibrary</code>) or overwriting return values. For example:</p>
+                        <pre class="bg-gray-800 text-white p-4 rounded"><code>Interceptor.attach(Module.findExportByName(null, 'access'), {
+    onEnter: function(args) {
+        // intercepts root check
+    }
+});</code></pre>
+                        <p>With a custom VM, attackers only see:</p>
+                        <pre class="bg-gray-800 text-white p-4 rounded"><code>val result = MiniVM(bytecode).run()</code></pre>
+                        <p>They must reverse-engineer the entire interpreter and decode opcodes like <code>0x01</code>, significantly increasing the effort required.</p>
+                        <h4 class="text-lg font-semibold mt-4">Real-World Obfuscation Practices</h4>
+                        <p>To further thwart attackers, you can:</p>
+                        <ul class="list-disc ml-6 space-y-2">
+                            <li>Encrypt the bytecode and decrypt it at runtime.</li>
+                            <li>Inject dead instructions (e.g., NOOP, JUNK) to confuse disassemblers.</li>
+                            <li>Use runtime mutation, where opcodes change meaning based on a session key.</li>
+                        </ul>
+                        <h4 class="text-lg font-semibold mt-4">Performance and Maintenance</h4>
+                        <p>Custom VMs are less performant and harder to maintain across different architectures. However, for security-critical apps—like banking, fintech, or secure messaging—these trade-offs are justified.</p>
+                        <h4 class="text-lg font-semibold mt-4">Thoughts</h4>
+                        <p>Running root detection in ART or native code is insufficient against modern reverse-engineering tools. This Pseudo VM technique, used by malware to evade antivirus detection, is now leveraged by solutions like Google Play Integrity’s <code>libpairipcore.so</code>. A custom VM forces reverse engineers to:</p>
+                        <ul class="list-disc ml-6 space-y-2">
+                            <li>Reverse-engineer a new instruction set.</li>
+                            <li>Dump and decode opaque bytecode.</li>
+                            <li>Spend significantly more time understanding the app’s behavior.</li>
+                        </ul>
+                        <p>Building a lightweight VM for critical checks makes Android apps far harder to reverse, enhancing security for sensitive operations.</p>
+                    </div>
+                </div>
+                <!-- Blog Post 2 -->
+                <div class="blog-card bg-white p-6 rounded-lg shadow-md cursor-pointer" onclick="toggleBlogContent('blog2')">
+                    <h3 class="text-xl font-semibold">Securing Android Apps with JetSecurity</h3>
+                    <p class="text-gray-600 text-sm">Posted on June 19, 2025</p>
+                    <p class="text-gray-600 mt-2">Leveraging JetSecurity for robust encryption and authentication in financial applications.</p>
+                    <div id="blog2" class="blog-content mt-4 text-gray-700">
+                        <p>As an Android developer specializing in financial applications, ensuring robust security is paramount. In my recent projects, such as the Osta Banking App and RKI Application, I leveraged JetSecurity to implement advanced cryptographic protocols. JetSecurity, part of Android Jetpack, simplifies the integration of encryption and authentication mechanisms. For instance, I used it to secure data transmission with AES-256 encryption and implement two-factor authentication, significantly reducing vulnerabilities. My research into JetSecurity also revealed its compatibility with Payment Card Industry (PCI) compliance, making it ideal for payment-focused apps like Mosambee. To get started, ensure you include the JetSecurity library in your Gradle file and configure a Security Key Provider. This approach has proven effective in my work, enhancing both security and user trust.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Contact Section -->
     <section id="contact" class="py-16 bg-blue-900 text-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h3 class="text-3xl font-bold text-center mb-2">Contact Me</h3>
+            <h2 class="text-3xl font-bold text-center mb-2">Contact Me</h2>
             <p class="text-center mb-8">Feel free to reach out for collaboration or inquiries!</p>
-            <div class="flex justify-center">
-                <div class="mailto:bg-gray-600">Phone: <a href="tel:+919021594157">+91 9021594157</a></p>
-                <p class="bg-gray-600">Email: <a href="mailto:sagarb522@gmail.com">sagarb522@gmail.com</p>
-                <p class="bg-gray-600">GitHub: <a href="https://github.com/sagarbhandari111" target="_blank">sagarbhandari111</a></p>
-                <p class="text-gray-600">Location: Thane, Mumbai, India</p>
+            <div class="flex flex-col items-center space-y-4">
+                <p>Phone: <a href="tel:+919021594157" class="hover:underline">+91 9021594157</a></p>
+                <p>Email: <a href="mailto:sagarb522@gmail.com" class="hover:underline">sagarb522@gmail.com</a></p>
+                <p>GitHub: <a href="https://github.com/sagarbhandari111" target="_blank" class="hover:underline">sagarbhandari111</a></p>
+                <p>Location: Thane, Mumbai, India</p>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
     <footer class="bg-gray-800 text-white py-4 text-center">
-        <p>&copy; 2025 Sagar Bhandari. All rights reserved.</p>
-    </section>
+        <p>© 2025 Sagar Bhandari. All rights reserved.</p>
+    </footer>
 
     <script>
         // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]')').forEach(anchor => {
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 document.querySelector(this.getAttribute('href')).scrollIntoView({
@@ -268,6 +348,20 @@
                 });
             });
         });
+
+        // Toggle blog content visibility
+        function toggleBlogContent(blogId) {
+            const content = document.getElementById(blogId);
+            const isActive = content.classList.contains('active');
+            // Hide all blog contents
+            document.querySelectorAll('.blog-content').forEach(item => {
+                item.classList.remove('active');
+            });
+            // Show the clicked blog content if it wasn't already active
+            if (!isActive) {
+                content.classList.add('active');
+            }
+        }
     </script>
 </body>
 </html>
