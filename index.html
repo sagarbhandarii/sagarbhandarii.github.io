@@ -54,63 +54,95 @@
             transform: translateY(-5px);
             transition: transform 0.3s ease;
         }
-        /* Hide full content by default */
+        /* Hide full blog content by default */
         .blog-content {
             display: none;
         }
         .blog-content.active {
             display: block;
         }
+        /* Circular profile photo */
+        .profile-photo {
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        /* Mobile menu hidden by default */
+        .mobile-menu {
+            display: none;
+        }
+        /* Show mobile menu when active */
+        .mobile-menu.active {
+            display: block;
+        }
     </style>
 </head>
 <body class="bg-gray-100 font-sans text-gray-800">
     <!-- Navigation Bar -->
-    <nav class="bg-blue-900 text-white fixed w-full top-0 z-10 shadow-lg">
+    <nav class="bg-cyan-50 text-gray-800 fixed w-full top-0 z-10 shadow-md">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
             <div class="text-2xl font-bold">Sagar Bhandari</div>
-            <ul class="flex space-x-6">
-                <li><a href="#home" class="hover:text-blue-300">Home</a></li>
-                <li><a href="#about" class="hover:text-blue-300">About</a></li>
-                <li><a href="#experience" class="hover:text-blue-300">Experience</a></li>
-                <li><a href="#projects" class="hover:text-blue-300">Projects</a></li>
-                <li><a href="#education" class="hover:text-blue-300">Education</a></li>
-                <li><a href="#skills" class="hover:text-blue-300">Skills</a></li>
-                <li><a href="#blog" class="hover:text-blue-300">Blog</a></li>
-                <li><a href="#contact" class="hover:text-blue-300">Contact</a></li>
+            <!-- Desktop Menu -->
+            <ul class="hidden md:flex space-x-6">
+                <li><a href="#home" class="hover:text-cyan-600">Home</a></li>
+                <li><a href="#about" class="hover:text-cyan-600">About</a></li>
+                <li><a href="#experience" class="hover:text-cyan-600">Experience</a></li>
+                <li><a href="#projects" class="hover:text-cyan-600">Projects</a></li>
+                <li><a href="#education" class="hover:text-cyan-600">Education</a></li>
+                <li><a href="#skills" class="hover:text-cyan-600">Skills</a></li>
+                <li><a href="#blog" class="hover:text-cyan-600">Blog</a></li>
+                <li><a href="#contact" class="hover:text-cyan-600">Contact</a></li>
             </ul>
+            <!-- Hamburger Icon for Mobile -->
+            <button id="hamburger" class="md:hidden focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
         </div>
+        <!-- Mobile Menu -->
+        <ul id="mobile-menu" class="mobile-menu bg-cyan-50 md:hidden flex-col items-center space-y-4 py-4">
+            <li><a href="#home" class="hover:text-cyan-600">Home</a></li>
+            <li><a href="#about" class="hover:text-cyan-600">About</a></li>
+            <li><a href="#experience" class="hover:text-cyan-600">Experience</a></li>
+            <li><a href="#projects" class="hover:text-cyan-600">Projects</a></li>
+            <li><a href="#education" class="hover:text-cyan-600">Education</a></li>
+            <li><a href="#skills" class="hover:text-cyan-600">Skills</a></li>
+            <li><a href="#blog" class="hover:text-cyan-600">Blog</a></li>
+            <li><a href="#contact" class="hover:text-cyan-600">Contact</a></li>
+        </ul>
     </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-900 to-blue-600 text-white pt-16">
-        <div class="text-center">
-            <h1 class="text-5xl font-bold mb-4">Sagar Bhandari</h1>
-            <p class="text-2xl mb-6">Senior Android Developer</p>
-            <p class="text-lg max-w-2xl mx-auto">Building high-performance financial applications with over 5 years of expertise in Java, Kotlin, and Android SDK.</p>
-            <a href="#contact" class="mt-6 inline-block bg-white text-blue-900 px-6 py-3 rounded-lg font-semibold hover:bg-gray-200">Get in Touch</a>
+    <section id="home" class="min-h-screen flex items-center justify-center bg-gradient-to-r from-cyan-50 to-white text-gray-800 pt-20">
+        <div class="text-center px-4">
+            <img src="./profile.png" alt="Sagar Bhandari Profile Photo" class="profile-photo w-24 h-24 sm:w-32 sm:h-32 mx-auto mb-4">
+            <h1 class="text-4xl sm:text-5xl font-bold mb-4">Sagar Bhandari</h1>
+            <p class="text-xl sm:text-2xl mb-6">Senior Android Developer</p>
+            <p class="text-base sm:text-lg max-w-2xl mx-auto">Building high-performance financial applications with over 5 years of expertise in Java, Kotlin, and Android SDK.</p>
+            <a href="#contact" class="mt-6 inline-block bg-cyan-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-cyan-700">Get in Touch</a>
         </div>
     </section>
 
     <!-- About Section -->
-    <section id="about" class="py-16 bg-white">
+    <section id="about" class="py-12 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-3xl font-bold text-center mb-8">About Me</h2>
-            <p class="text-lg max-w-3xl mx-auto text-center">
+            <h2 class="text-2xl sm:text-3xl font-bold text-center mb-6">About Me</h2>
+            <p class="text-base sm:text-lg max-w-3xl mx-auto text-center">
                 Senior Android Developer with over 5 years of experience in developing high-performance financial applications. Proficient in Java and Kotlin, with expertise in Android SDK, Jetpack, and security frameworks. Skilled in leading teams, optimizing performance, and implementing best practices. Proven ability to translate business requirements into technical solutions, driving innovation and enhancing user experience.
             </p>
         </div>
     </section>
 
     <!-- Experience Section -->
-    <section id="experience" class="py-16 bg-gray-100">
+    <section id="experience" class="py-12 bg-gray-100">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-3xl font-bold text-center mb-8">Professional Experience</h2>
-            <div class="space-y-8">
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <h3 class="text-xl font-semibold">Senior Android Developer</h3>
+            <h2 class="text-2xl sm:text-3xl font-bold text-center mb-6">Professional Experience</h2>
+            <div class="space-y-6">
+                <div class="bg-white p-4 sm:p-6 rounded-lg shadow-md">
+                    <h3 class="text-lg sm:text-xl font-semibold">Senior Android Developer</h3>
                     <p class="text-gray-600">Synergistic Financial Network PVT. LTD. (Acquired by PINLAB), Mumbai, India</p>
                     <p class="text-gray-600">June 2022 - Present</p>
-                    <ul class="list-disc ml-6 mt-4 space-y-2">
+                    <ul class="list-disc ml-6 mt-4 space-y-2 text-sm sm:text-base">
                         <li>Led development and maintenance of critical Android applications for financial services, ensuring scalability and security.</li>
                         <li>Collaborated with cross-functional teams to define requirements and implement new features.</li>
                         <li>Mentored junior developers, fostering knowledge sharing and continuous learning.</li>
@@ -118,11 +150,11 @@
                         <li>Conducted code reviews and contributed to continuous improvement initiatives.</li>
                     </ul>
                 </div>
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <h3 class="text-xl font-semibold">Android Developer</h3>
+                <div class="bg-white p-4 sm:p-6 rounded-lg shadow-md">
+                    <h3 class="text-lg sm:text-xl font-semibold">Android Developer</h3>
                     <p class="text-gray-600">Brontoo Technology Financial Network PVT, Mumbai, India</p>
                     <p class="text-gray-600">May 2019 - May 2022</p>
-                    <ul class="list-disc ml-6 mt-4 space-y-2">
+                    <ul class="list-disc ml-6 mt-4 space-y-2 text-sm sm:text-base">
                         <li>Designed and developed Android applications for financial services, focusing on performance and stability.</li>
                         <li>Collaborated with product managers to gather requirements and translate them into technical solutions.</li>
                         <li>Integrated payment gateways to facilitate secure transactions.</li>
@@ -135,168 +167,271 @@
     </section>
 
     <!-- Projects Section -->
-    <section id="projects" class="py-16 bg-white">
+    <section id="projects" class="py-12 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-3xl font-bold text-center mb-8">Projects</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="project-card bg-gray-100 p-6 rounded-lg shadow-md">
-                    <h3 class="text-lg font-semibold">Osta Banking App</h3>
-                    <p class="text-gray-600">Developed an application with over 5,000 downloads, featuring two-factor authentication and encrypted data transmission.</p>
+            <h2 class="text-2xl sm:text-3xl font-bold text-center mb-6">Projects</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div class="project-card bg-gray-100 p-4 rounded-lg shadow-md">
+                    <h3 class="text-base sm:text-lg font-semibold">Osta Banking App</h3>
+                    <p class="text-gray-600 text-sm sm:text-base">Developed an application with over 5,000 downloads, featuring two-factor authentication and encrypted data transmission.</p>
                 </div>
-                <div class="project-card bg-gray-100 p-6 rounded-lg shadow-md">
-                    <h3 class="text-lg font-semibold">Bank SDK (Payment Solutions)</h3>
-                    <p class="text-gray-600">Created a Bank SDK for CEAGE Technology and Central Bank of India, integrated into over 50 banks with features like BillPay and Fastag.</p>
+                <div class="project-card bg-gray-100 p-4 rounded-lg shadow-md">
+                    <h3 class="text-base sm:text-lg font-semibold">Bank SDK (Payment Solutions)</h3>
+                    <p class="text-gray-600 text-sm sm:text-base">Created a Bank SDK for CEAGE Technology and Central Bank of India, integrated into over 50 banks with features like BillPay and Fastag.</p>
                 </div>
-                <div class="project-card bg-gray-100 p-6 rounded-lg shadow-md">
-                    <h3 class="text-lg font-semibold">Payment Gateway SDK</h3>
-                    <p class="text-gray-600">Developed an intermediary SDK for seamless and secure payments between clients and payment gateways.</p>
+                <div class="project-card bg-gray-100 p-4 rounded-lg shadow-md">
+                    <h3 class="text-base sm:text-lg font-semibold">Payment Gateway SDK</h3>
+                    <p class="text-gray-600 text-sm sm:text-base">Developed an intermediary SDK for seamless and secure payments between clients and payment gateways.</p>
                 </div>
-                <div class="project-card bg-gray-100 p-6 rounded-lg shadow-md">
-                    <h3 class="text-lg font-semibold">Mosambee Application</h3>
-                    <p class="text-gray-600">Contributed to an app with over 500,000 downloads, focusing on POS terminal integration and feature enhancements.</p>
+                <div class="project-card bg-gray-100 p-4 rounded-lg shadow-md">
+                    <h3 class="text-base sm:text-lg font-semibold">Mosambee Application</h3>
+                    <p class="text-gray-600 text-sm sm:text-base">Contributed to an app with over 500,000 downloads, focusing on POS terminal integration and feature enhancements.</p>
                 </div>
-                <div class="project-card bg-gray-100 p-6 rounded-lg shadow-md">
-                    <h3 class="text-lg font-semibold">Mosambee SDK</h3>
-                    <p class="text-gray-600">Developed a POS solution SDK, coordinating with merchants to resolve issues and add features.</p>
+                <div class="project-card bg-gray-100 p-4 rounded-lg shadow-md">
+                    <h3 class="text-base sm:text-lg font-semibold">Mosambee SDK</h3>
+                    <p class="text-gray-600 text-sm sm:text-base">Developed a POS solution SDK, coordinating with merchants to resolve issues and add features.</p>
                 </div>
-                <div class="project-card bg-gray-100 p-6 rounded-lg shadow-md">
-                    <h3 class="text-lg font-semibold">Central Railway Fine Pay Application</h3>
-                    <p class="text-gray-600">Built a payment solution for ticket collectors on POS terminals with secure payment gateways.</p>
+                <div class="project-card bg-gray-100 p-4 rounded-lg shadow-md">
+                    <h3 class="text-base sm:text-lg font-semibold">Central Railway Fine Pay Application</h3>
+                    <p class="text-gray-600 text-sm sm:text-base">Built a payment solution for ticket collectors on POS terminals with secure payment gateways.</p>
                 </div>
-                <div class="project-card bg-gray-100 p-6 rounded-lg shadow-md">
-                    <h3 class="text-lg font-semibold">RKI Application</h3>
-                    <p class="text-gray-600">Developed a mobile app for secure key injection into payment terminals using Java/Kotlin and robust encryption.</p>
+                <div class="project-card bg-gray-100 p-4 rounded-lg shadow-md">
+                    <h3 class="text-base sm:text-lg font-semibold">RKI Application</h3>
+                    <p class="text-gray-600 text-sm sm:text-base">Developed a mobile app for secure key injection into payment terminals using Java/Kotlin and robust encryption.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Education Section -->
-    <section id="education" class="py-16 bg-gray-100">
+    <section id="education" class="py-12 bg-gray-100">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-3xl font-bold text-center mb-8">Education</h2>
-            <div class="space-y-6">
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <h3 class="text-xl font-semibold">Bachelor of Engineering in Computer Engineering</h3>
-                    <p class="text-gray-600">Vidyalankar Institute of Technology, Mumbai University</p>
-                    <p class="text-gray-600">April 2016 - May 2019</p>
-                    <p class="text-gray-600">CGPA: 8/10</p>
+            <h2 class="text-2xl sm:text-3xl font-bold text-center mb-6">Education</h2>
+            <div class="space-y-4">
+                <div class="bg-white p-4 sm:p-6 rounded-lg shadow-md">
+                    <h3 class="text-lg sm:text-xl font-semibold">Bachelor of Engineering in Computer Engineering</h3>
+                    <p class="text-gray-600 text-sm sm:text-base">Vidyalankar Institute of Technology, Mumbai University</p>
+                    <p class="text-gray-600 text-sm sm:text-base">April 2016 - May 2019</p>
+                    <p class="text-gray-600 text-sm sm:text-base">CGPA: 8/10</p>
                 </div>
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <h3 class="text-xl font-semibold">Diploma in Computer Engineering</h3>
-                    <p class="text-gray-600">Government Polytechnic Thane, Mumbai University</p>
-                    <p class="text-gray-600">April 2013 - May 2016</p>
-                    <p class="text-gray-600">Percentage: 83/100</p>
+                <div class="bg-white p-4 sm:p-6 rounded-lg shadow-md">
+                    <h3 class="text-lg sm:text-xl font-semibold">Diploma in Computer Engineering</h3>
+                    <p class="text-gray-600 text-sm sm:text-base">Government Polytechnic Thane, Mumbai University</p>
+                    <p class="text-gray-600 text-sm sm:text-base">April 2013 - May 2016</p>
+                    <p class="text-gray-600 text-sm sm:text-base">Percentage: 83/100</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Skills Section -->
-    <section id="skills" class="py-16 bg-white">
+    <section id="skills" class="py-12 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-3xl font-bold text-center mb-8">Skills</h2>
+            <h2 class="text-2xl sm:text-3xl font-bold text-center mb-6">Skills</h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 <div class="bg-gray-100 p-4 rounded-lg">
-                    <h3 class="font-semibold">Programming Languages</h3>
-                    <p>Java, Kotlin</p>
+                    <h3 class="font-semibold text-sm sm:text-base">Programming Languages</h3>
+                    <p class="text-sm sm:text-base">Java, Kotlin</p>
                 </div>
                 <div class="bg-gray-100 p-4 rounded-lg">
-                    <h3 class="font-semibold">Android Frameworks</h3>
-                    <p>Android SDK, Android Jetpack, Retrofit, Room, JetSecurity</p>
+                    <h3 class="font-semibold text-sm sm:text-base">Android Frameworks</h3>
+                    <p class="text-sm sm:text-base">Android SDK, Android Jetpack, Retrofit, Room, JetSecurity</p>
                 </div>
                 <div class="bg-gray-100 p-4 rounded-lg">
-                    <h3 class="font-semibold">UI/UX</h3>
-                    <p>XML, ConstraintLayout, Material Design</p>
+                    <h3 class="font-semibold text-sm sm:text-base">UI/UX</h3>
+                    <p class="text-sm sm:text-base">XML, ConstraintLayout, Material Design</p>
                 </div>
                 <div class="bg-gray-100 p-4 rounded-lg">
-                    <h3 class="font-semibold">Version Control</h3>
-                    <p>Git, GitHub, Gittab</p>
+                    <h3 class="font-semibold text-sm sm:text-base">Version Control</h3>
+                    <p class="text-sm sm:text-base">Git, GitHub, Gittab</p>
                 </div>
                 <div class="bg-gray-100 p-4 rounded-lg">
-                    <h3 class="font-semibold">Architectural Patterns</h3>
-                    <p>MVP, MVVM</p>
+                    <h3 class="font-semibold text-sm sm:text-base">Architectural Patterns</h3>
+                    <p class="text-sm sm:text-base">MVP, MVVM</p>
                 </div>
                 <div class="bg-gray-100 p-4 rounded-lg">
-                    <h3 class="font-semibold">Dependency Injection</h3>
-                    <p>Dagger, Hilt</p>
+                    <h3 class="font-semibold text-sm sm:text-base">Dependency Injection</h3>
+                    <p class="text-sm sm:text-base">Dagger, Hilt</p>
                 </div>
                 <div class="bg-gray-100 p-4 rounded-lg">
-                    <h3 class="font-semibold">Reactive Programming</h3>
-                    <p>RxJava, LiveData</p>
+                    <h3 class="font-semibold text-sm sm:text-base">Reactive Programming</h3>
+                    <p class="text-sm sm:text-base">RxJava, LiveData</p>
                 </div>
                 <div class="bg-gray-100 p-4 rounded-lg">
-                    <h3 class="font-semibold">Payment Gateways</h3>
-                    <p>PayPal, AggreyPay, Paytm</p>
+                    <h3 class="font-semibold text-sm sm:text-base">Payment Gateways</h3>
+                    <p class="text-sm sm:text-base">PayPal, AggreyPay, Paytm</p>
                 </div>
                 <div class="bg-gray-100 p-4 rounded-lg">
-                    <h3 class="font-semibold">Data Persistence</h3>
-                    <p>SQLite, Room, Realtime Database</p>
+                    <h3 class="font-semibold text-sm sm:text-base">Data Persistence</h3>
+                    <p class="text-sm sm:text-base">SQLite, Room, Realtime Database</p>
                 </div>
                 <div class="bg-gray-100 p-4 rounded-lg">
-                    <p>Performance Optimization, Debugging, PCI Compliance, Cryptographic Protocols</p>
+                    <p class="text-sm sm:text-base">Performance Optimization, Debugging, PCI Compliance, Cryptographic Protocols</p>
                 </div>
                 <div class="bg-gray-100 p-4 rounded-lg">
-                    <h3 class="font-semibold">Payment Terminals</h3>
-                    <p>M919, Qpos, P10, P5, KOZEN, APOS</p>
+                    <h3 class="font-semibold text-sm sm:text-base">Payment Terminals</h3>
+                    <p class="text-sm sm:text-base">M919, Qpos, P10, P5, KOZEN, APOS</p>
                 </div>
                 <div class="bg-gray-100 p-4 rounded-lg">
-                    <h3 class="font-semibold">Other</h3>
-                    <p>Flutter (Plugin Implementation), RKI (Remote Key Injection) Terminals, EMV Application (POS Device)</p>
+                    <h3 class="font-semibold text-sm sm:text-base">Other</h3>
+                    <p class="text-sm sm:text-base">Flutter (Plugin Implementation), RKI (Remote Key Injection) Terminals, EMV Application (POS Device)</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Blog Section -->
-    <section id="blog" class="py-16 bg-gray-100">
+    <section id="blog" class="py-12 bg-gray-100">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-3xl font-bold text-center mb-8">Blog</h2>
-            <div class="space-y-6">
+            <h2 class="text-2xl sm:text-3xl font-bold text-center mb-6">Blog</h2>
+            <div class="space-y-4">
                 <!-- Blog Post 1 -->
-                <div class="blog-card bg-white p-6 rounded-lg shadow-md cursor-pointer" onclick="toggleBlogContent('blog1')">
-                    <h3 class="text-xl font-semibold">Enhancing Android Security with a Custom Virtual Machine</h3>
-                    <p class="text-gray-600 text-sm">Posted on June 19, 2025</p>
-                    <p class="text-gray-600 mt-2">Exploring why executing root detection in a custom VM is more secure than traditional Java, Kotlin, or C/C++ approaches.</p>
-                    <div id="blog1" class="blog-content mt-4 text-gray-700">
+                <div class="blog-card bg-white p-4 sm:p-6 rounded-lg shadow-md cursor-pointer" onclick="toggleBlogContent('blog1')">
+                    <h3 class="text-lg sm:text-xl font-semibold">Building a Custom AppSealing-Like APK Protection System</h3>
+                    <p class="text-gray-600 text-xs sm:text-sm">Posted on December 19, 2024</p>
+                    <p class="text-gray-600 mt-2 text-sm sm:text-base">A guide to creating a custom APK protection system with DEX encryption, native anti-debug checks, and dynamic loading.</p>
+                    <div id="blog1" class="blog-content mt-4 text-gray-700 text-sm sm:text-base">
+                        <h4 class="text-base sm:text-lg font-semibold">Introduction</h4>
+                        <p>In today’s mobile app landscape, protecting intellectual property and securing sensitive code against reverse engineering is crucial. Commercial solutions like AppSealing provide strong runtime protection and obfuscation, but what if you want to build your own free, custom protection system?</p>
+                        <p>This blog walks you through building an AppSealing-style APK protector from scratch, featuring DEX encryption, native anti-debug checks, and dynamic loading.</p>
+                        <h4 class="text-base sm:text-lg font-semibold mt-4">Goals</h4>
+                        <ul class="list-disc ml-6 space-y-2">
+                            <li>Obfuscate Java bytecode</li>
+                            <li>Encrypt classes.dex to prevent static analysis</li>
+                            <li>Load encrypted DEX at runtime using native code</li>
+                            <li>Detect root, debugger, and Frida</li>
+                            <li>Verify APK integrity to prevent tampering</li>
+                        </ul>
+                        <h4 class="text-base sm:text-lg font-semibold mt-4">Phase 1: Basic Obfuscation</h4>
+                        <p>We begin by obfuscating our app using <a href="https://github.com/Guardsquare/proguard" class="text-cyan-600 hover:underline">ProGuard</a> or a similar free tool like Allatori alternatives.</p>
+                        <p><strong>Sample ProGuard Rules:</strong></p>
+                        <pre class="bg-gray-800 text-white p-4 rounded text-xs sm:text-sm"><code>-keep public class * {
+    public static void main(java.lang.String[]);
+}
+-renamesourcefileattribute SourceFile
+-keepattributes SourceFile,LineNumberTable
+-allowaccessmodification
+-overloadaggressively
+-dontpreverify</code></pre>
+                        <p>Convert the obfuscated <code>.jar</code> to <code>.dex</code> using <code>d8</code>:</p>
+                        <pre class="bg-gray-800 text-white p-4 rounded text-xs sm:text-sm"><code>d8 your-obfuscated.jar --output=.</code></pre>
+                        <h4 class="text-base sm:text-lg font-semibold mt-4">Phase 2: Encrypting the DEX</h4>
+                        <p>The core protection comes from encrypting the <code>classes.dex</code> and loading it dynamically.</p>
+                        <p><strong>Python AES Encryptor:</strong></p>
+                        <pre class="bg-gray-800 text-white p-4 rounded text-xs sm:text-sm"><code>from Crypto.Cipher import AES
+key = b'your16byteaeskey'
+iv = b'16byteinitvector'
+
+def pad(data):
+    return data + (16 - len(data) % 16) * bytes([16 - len(data) % 16])
+
+with open('classes.dex', 'rb') as f:
+    raw = f.read()
+
+cipher = AES.new(key, AES.MODE_CBC, iv)
+enc = cipher.encrypt(pad(raw))
+
+with open('encrypted.dex', 'wb') as f:
+    f.write(enc)</code></pre>
+                        <h4 class="text-base sm:text-lg font-semibold mt-4">Phase 3: Loader APK</h4>
+                        <p>Create a lightweight launcher app that loads the encrypted dex at runtime.</p>
+                        <p><strong>Java: NativeLoader.java</strong></p>
+                        <pre class="bg-gray-800 text-white p-4 rounded text-xs sm:text-sm"><code>public class NativeLoader {
+    public static native byte[] decrypt(byte[] encrypted);
+
+    public static void loadEncryptedDex(Context context) {
+        // Load encrypted.dex from assets, decrypt using JNI, write to disk, load via DexClassLoader
+    }
+}</code></pre>
+                        <h4 class="text-base sm:text-lg font-semibold mt-4">Phase 4: Native Decryption (JNI)</h4>
+                        <p>Using C++, decrypt the encrypted DEX with AES at runtime.</p>
+                        <p><strong>C++ (loader.cpp)</strong></p>
+                        <pre class="bg-gray-800 text-white p-4 rounded text-xs sm:text-sm"><code>extern "C" JNIEXPORT jbyteArray JNICALL
+Java_com_protect_loaderapp_NativeLoader_decrypt(JNIEnv *env, jclass clazz, jbyteArray encrypted) {
+    // Perform AES decryption
+    // Return decrypted byte[] to Java
+}</code></pre>
+                        <p>You can use OpenSSL or a lightweight AES library.</p>
+                        <h4 class="text-base sm:text-lg font-semibold mt-4">Phase 5: Anti-Debug and Anti-Frida</h4>
+                        <p>Embed anti-debugging logic in your native code:</p>
+                        <p><strong>Example (anti_debug.cpp)</strong></p>
+                        <pre class="bg-gray-800 text-white p-4 rounded text-xs sm:text-sm"><code>bool is_debugger_attached() {
+    std::ifstream status("/proc/self/status");
+    std::string line;
+    while (getline(status, line)) {
+        if (line.find("TracerPid:") != std::string::npos) {
+            return line.back() != '0';
+        }
+    }
+    return false;
+}</code></pre>
+                        <p>Also check for Frida's named pipes, Magisk files, or root binaries.</p>
+                        <h4 class="text-base sm:text-lg font-semibold mt-4">Phase 6: Rebuild and Sign APK</h4>
+                        <p>Use <code>apktool</code> to repack the loader APK:</p>
+                        <pre class="bg-gray-800 text-white p-4 rounded text-xs sm:text-sm"><code>apktool b base-dir -o unsigned.apk
+jarsigner -keystore debug.keystore -storepass android -signedjar final.apk unsigned.apk androiddebugkey</code></pre>
+                        <p>You can also use <code>zipalign</code> for final optimization.</p>
+                        <h4 class="text-base sm:text-lg font-semibold mt-4">Conclusion</h4>
+                        <p>This custom protection system makes it significantly harder for reverse engineers to statically or dynamically analyze your app. While not as advanced as commercial obfuscators, it provides:</p>
+                        <ul class="list-disc ml-6 space-y-2">
+                            <li>Code concealment via encryption</li>
+                            <li>Dynamic runtime loading</li>
+                            <li>Native anti-debug and anti-Frida</li>
+                        </ul>
+                        <p>For apps with high-security requirements, you can extend this system by:</p>
+                        <ul class="list-disc ml-6 space-y-2">
+                            <li>Obfuscating native code (using LLVM or Tigress)</li>
+                            <li>Using VM-based protection</li>
+                            <li>Adding polymorphic loader behavior</li>
+                        </ul>
+                        <p>Security through obscurity is not enough — combine this with secure architecture, minimal runtime permissions, and API hardening.</p>
+                        <p><strong>Need help generating the full working project zip?</strong> Reach out via the contact section below!</p>
+                    </div>
+                </div>
+                <!-- Blog Post 2 -->
+                <div class="blog-card bg-white p-4 sm:p-6 rounded-lg shadow-md cursor-pointer" onclick="toggleBlogContent('blog2')">
+                    <h3 class="text-lg sm:text-xl font-semibold">Enhancing Android Security with a Custom Virtual Machine</h3>
+                    <p class="text-gray-600 text-xs sm:text-sm">Posted on December 19, 2024</p>
+                    <p class="text-gray-600 mt-2 text-sm sm:text-base">Exploring why executing root detection in a custom VM is more secure than traditional Java, Kotlin, or C/C++ approaches.</p>
+                    <div id="blog2" class="blog-content mt-4 text-gray-700 text-sm sm:text-base">
                         <p>There are many techniques to protect sensitive code in Android, such as obfuscation or moving logic to native C/C++ code compiled to machine code. However, tools like IDA Pro, Ghidra, and Frida make it easy to reverse-engineer and hook such code with custom implementations.</p>
                         <p>In this post, I discuss why executing root detection inside a custom virtual machine (VM) is significantly more secure than running the same logic directly in Java, Kotlin, or even native C/C++ code—and what this means for tools like Frida and experienced reverse engineers.</p>
-                        <h4 class="text-lg font-semibold mt-4">Root Detection in ART or Native</h4>
+                        <h4 class="text-base sm:text-lg font-semibold mt-4">Root Detection in ART or Native</h4>
                         <p>Most apps implement root detection with simple checks, like this in Kotlin:</p>
-                        <pre class="bg-gray-800 text-white p-4 rounded"><code>fun isDeviceRooted(): Boolean {
+                        <pre class="bg-gray-800 text-white p-4 rounded text-xs sm:text-sm"><code>fun isDeviceRooted(): Boolean {
     return File("/system/bin/su").exists()
 }</code></pre>
                         <p>Or in C:</p>
-                        <pre class="bg-gray-800 text-white p-4 rounded"><code>bool isRooted() {
+                        <pre class="bg-gray-800 text-white p-4 rounded text-xs sm:text-sm"><code>bool isRooted() {
     return access("/system/bin/su", F_OK) == 0;
 }</code></pre>
                         <p>While these might catch some rooted devices, Frida scripts can override return values, decompiled APKs reveal function names, and native .so files can be patched using tools like Ghidra or IDA Pro.</p>
-                        <h4 class="text-lg font-semibold mt-4">Using a Custom VM</h4>
+                        <h4 class="text-base sm:text-lg font-semibold mt-4">Using a Custom VM</h4>
                         <p>A custom VM operates by defining a unique bytecode format and instruction set (e.g., opcodes like CHECK_ROOT, HALT). Sensitive logic is written in this bytecode, not in Kotlin or Java, and executed by a custom interpreter at runtime. For example:</p>
-                        <pre class="bg-gray-800 text-white p-4 rounded"><code>val bytecode = byteArrayOf(0x01, 0xFF) // CHECK_ROOT, HALT
+                        <pre class="bg-gray-800 text-white p-4 rounded text-xs sm:text-sm"><code>val bytecode = byteArrayOf(0x01, 0xFF) // CHECK_ROOT, HALT
 val vm = CustomVM(bytecode)
 val result = vm.run()</code></pre>
                         <p>The actual logic, such as which files to check or APIs to call, resides within the VM’s opcode handling, not in exposed functions.</p>
-                        <h4 class="text-lg font-semibold mt-4">Challenges with Frida</h4>
+                        <h4 class="text-base sm:text-lg font-semibold mt-4">Challenges with Frida</h4>
                         <p>Frida works by hooking well-known methods (e.g., <code>access</code>, <code>exists</code>, <code>System.loadLibrary</code>) or overwriting return values. For example:</p>
-                        <pre class="bg-gray-800 text-white p-4 rounded"><code>Interceptor.attach(Module.findExportByName(null, 'access'), {
+                        <pre class="bg-gray-800 text-white p-4 rounded text-xs sm:text-sm"><code>Interceptor.attach(Module.findExportByName(null, 'access'), {
     onEnter: function(args) {
         // intercepts root check
     }
 });</code></pre>
                         <p>With a custom VM, attackers only see:</p>
-                        <pre class="bg-gray-800 text-white p-4 rounded"><code>val result = MiniVM(bytecode).run()</code></pre>
+                        <pre class="bg-gray-800 text-white p-4 rounded text-xs sm:text-sm"><code>val result = MiniVM(bytecode).run()</code></pre>
                         <p>They must reverse-engineer the entire interpreter and decode opcodes like <code>0x01</code>, significantly increasing the effort required.</p>
-                        <h4 class="text-lg font-semibold mt-4">Real-World Obfuscation Practices</h4>
+                        <h4 class="text-base sm:text-lg font-semibold mt-4">Real-World Obfuscation Practices</h4>
                         <p>To further thwart attackers, you can:</p>
                         <ul class="list-disc ml-6 space-y-2">
                             <li>Encrypt the bytecode and decrypt it at runtime.</li>
                             <li>Inject dead instructions (e.g., NOOP, JUNK) to confuse disassemblers.</li>
                             <li>Use runtime mutation, where opcodes change meaning based on a session key.</li>
                         </ul>
-                        <h4 class="text-lg font-semibold mt-4">Performance and Maintenance</h4>
+                        <h4 class="text-base sm:text-lg font-semibold mt-4">Performance and Maintenance</h4>
                         <p>Custom VMs are less performant and harder to maintain across different architectures. However, for security-critical apps—like banking, fintech, or secure messaging—these trade-offs are justified.</p>
-                        <h4 class="text-lg font-semibold mt-4">Thoughts</h4>
+                        <h4 class="text-base sm:text-lg font-semibold mt-4">Thoughts</h4>
                         <p>Running root detection in ART or native code is insufficient against modern reverse-engineering tools. This Pseudo VM technique, used by malware to evade antivirus detection, is now leveraged by solutions like Google Play Integrity’s <code>libpairipcore.so</code>. A custom VM forces reverse engineers to:</p>
                         <ul class="list-disc ml-6 space-y-2">
                             <li>Reverse-engineer a new instruction set.</li>
@@ -306,12 +441,12 @@ val result = vm.run()</code></pre>
                         <p>Building a lightweight VM for critical checks makes Android apps far harder to reverse, enhancing security for sensitive operations.</p>
                     </div>
                 </div>
-                <!-- Blog Post 2 -->
-                <div class="blog-card bg-white p-6 rounded-lg shadow-md cursor-pointer" onclick="toggleBlogContent('blog2')">
-                    <h3 class="text-xl font-semibold">Securing Android Apps with JetSecurity</h3>
-                    <p class="text-gray-600 text-sm">Posted on June 19, 2025</p>
-                    <p class="text-gray-600 mt-2">Leveraging JetSecurity for robust encryption and authentication in financial applications.</p>
-                    <div id="blog2" class="blog-content mt-4 text-gray-700">
+                <!-- Blog Post 3 -->
+                <div class="blog-card bg-white p-4 sm:p-6 rounded-lg shadow-md cursor-pointer" onclick="toggleBlogContent('blog3')">
+                    <h3 class="text-lg sm:text-xl font-semibold">Securing Android Apps with JetSecurity</h3>
+                    <p class="text-gray-600 text-xs sm:text-sm">Posted on December 19, 2024</p>
+                    <p class="text-gray-600 mt-2 text-sm sm:text-base">Leveraging JetSecurity for robust encryption and authentication in financial applications.</p>
+                    <div id="blog3" class="blog-content mt-4 text-gray-700 text-sm sm:text-base">
                         <p>As an Android developer specializing in financial applications, ensuring robust security is paramount. In my recent projects, such as the Osta Banking App and RKI Application, I leveraged JetSecurity to implement advanced cryptographic protocols. JetSecurity, part of Android Jetpack, simplifies the integration of encryption and authentication mechanisms. For instance, I used it to secure data transmission with AES-256 encryption and implement two-factor authentication, significantly reducing vulnerabilities. My research into JetSecurity also revealed its compatibility with Payment Card Industry (PCI) compliance, making it ideal for payment-focused apps like Mosambee. To get started, ensure you include the JetSecurity library in your Gradle file and configure a Security Key Provider. This approach has proven effective in my work, enhancing both security and user trust.</p>
                     </div>
                 </div>
@@ -320,21 +455,21 @@ val result = vm.run()</code></pre>
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="py-16 bg-blue-900 text-white">
+    <section id="contact" class="py-12 bg-cyan-50 text-gray-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-3xl font-bold text-center mb-2">Contact Me</h2>
-            <p class="text-center mb-8">Feel free to reach out for collaboration or inquiries!</p>
-            <div class="flex flex-col items-center space-y-4">
-                <p>Phone: <a href="tel:+919021594157" class="hover:underline">+91 9021594157</a></p>
-                <p>Email: <a href="mailto:sagarb522@gmail.com" class="hover:underline">sagarb522@gmail.com</a></p>
-                <p>GitHub: <a href="https://github.com/sagarbhandari111" target="_blank" class="hover:underline">sagarbhandari111</a></p>
+            <h2 class="text-2xl sm:text-3xl font-bold text-center mb-2">Contact Me</h2>
+            <p class="text-center mb-6 text-sm sm:text-base">Feel free to reach out for collaboration or inquiries!</p>
+            <div class="flex flex-col items-center space-y-2 text-sm sm:text-base">
+                <p>Phone: <a href="tel:+919021594157" class="hover:text-cyan-600">+91 9021594157</a></p>
+                <p>Email: <a href="mailto:sagarb522@gmail.com" class="hover:text-cyan-600">sagarb522@gmail.com</a></p>
+                <p>GitHub: <a href="https://github.com/sagarbhandari111" target="_blank" class="hover:text-cyan-600">sagarbhandari111</a></p>
                 <p>Location: Thane, Mumbai, India</p>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-gray-800 text-white py-4 text-center">
+    <footer class="bg-gray-800 text-white py-4 text-center text-sm sm:text-base">
         <p>© 2025 Sagar Bhandari. All rights reserved.</p>
     </footer>
 
@@ -346,6 +481,10 @@ val result = vm.run()</code></pre>
                 document.querySelector(this.getAttribute('href')).scrollIntoView({
                     behavior: 'smooth'
                 });
+                // Close mobile menu after clicking a link
+                if (window.innerWidth < 768) {
+                    mobileMenu.classList.remove('active');
+                }
             });
         });
 
@@ -362,6 +501,13 @@ val result = vm.run()</code></pre>
                 content.classList.add('active');
             }
         }
+
+        // Hamburger menu toggle
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobile-menu');
+        hamburger.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+        });
     </script>
 </body>
 </html>
